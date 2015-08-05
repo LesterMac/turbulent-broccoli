@@ -18,8 +18,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
     <script>
         angular.module('myApp', []);
-        angular.module('myApp').controller('IndexCtrl', [indexController]);
-        function indexController() {
+        angular.module('myApp').controller('IndexCtrl', ['indexService', indexController]);
+        function indexController(indexService) {
             var self = this;
             self.title = 'Hello World';
             self.customers = getData();
@@ -33,6 +33,11 @@
                 ];
                 return items;
             };
+        };
+        angular.module('myApp').factory('indexService', [indexService])
+        function indexService() {
+            var service = {};
+            return service;
         };
     </script>
 </body>
