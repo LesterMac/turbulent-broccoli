@@ -22,9 +22,17 @@
         function indexController(indexService) {
             var self = this;
             self.title = 'Hello World';
-            self.customers = getData();
+            self.customers = indexService.getData();
 
-            function getData() {
+        };
+        angular.module('myApp').factory('indexService', [indexService])
+        function indexService() {
+            var service = {
+                getData: getItems
+            };
+            return service;
+
+            function getItems() {
                 var items = [
                     { CustomerID: 'CUST01', CompanyName: 'Company Name 1', ContactName: 'Contact Name 1' },
                     { CustomerID: 'CUST03', CompanyName: 'Company Name 3', ContactName: 'Contact Name 3' },
@@ -33,11 +41,6 @@
                 ];
                 return items;
             };
-        };
-        angular.module('myApp').factory('indexService', [indexService])
-        function indexService() {
-            var service = {};
-            return service;
         };
     </script>
 </body>
