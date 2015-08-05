@@ -16,15 +16,16 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="list-group">
-                    <a class="list-group-item" 
-                       ng-repeat="c in vm.customers" 
-                       ng-click="vm.selectCustomer(c)" 
+                    <a class="list-group-item"
+                       ng-repeat="c in vm.customers"
+                       ng-click="vm.selectCustomer(c)"
                        ng-class="{ 'active': c == vm.customer }">
                         {{c.CompanyName}}
                     </a>
                 </div>
             </div>
             <div class="col-md-9">
+                <customer-card user="vm.customer"></customer-card>
                 <pre>{{vm.customer}}</pre>
             </div>
         </div>
@@ -74,6 +75,30 @@
                 return $q.when(items);
             };
         };
+        angular.module('myCustomers').directive('customerCard', ['$window', customerCard]);
+
+        function customerCard($window) {
+            var directive = {
+                link: link,
+                restrict: 'EA',
+                scope: {
+                    user: '='
+                },
+                templateUrl: 'customerCardTemplate.html'
+            };
+            return directive;
+
+            function link(scope, element, attrs) {
+            }
+        }
     </script>
+    <script type="text/ng-template" id="customerCardTemplate.html">
+        <div>
+            CustomerID: {{user.CustomerID}}<br />
+            CompanyName: {{user.CompanyName}}<br />
+            ContactName: {{user.ContactName}}
+        </div>
+    </script>
+
 </body>
 </html>
