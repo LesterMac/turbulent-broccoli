@@ -16,13 +16,13 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="list-group">
-                    <a class="list-group-item" ng-repeat="c in vm.customers">
+                    <a class="list-group-item" ng-repeat="c in vm.customers" ng-click="vm.selectCustomer(c)">
                         {{c.CompanyName}}
                     </a>
                 </div>
             </div>
             <div class="col-md-9">
-                <h3>detail</h3>
+                <pre>{{vm.customer}}</pre>
             </div>
         </div>
         <hr />
@@ -39,6 +39,8 @@
             var self = this;
             self.title = 'Hello World';
             self.customers = [];
+            self.customer = {};
+            self.selectCustomer = selectCustomer;
 
             activate();
             function activate() {
@@ -46,6 +48,10 @@
                     self.customers = data;
                 });
             };
+
+            function selectCustomer(val) {
+                self.customer = val;
+            }
 
         };
         angular.module('myCustomers').factory('customerService', ['$q', customerService])
