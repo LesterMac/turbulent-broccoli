@@ -14,7 +14,7 @@
         <h2>{{vm.title}}</h2>
         <hr />
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-sm-4">
                 <div class="list-group">
                     <a class="list-group-item"
                        ng-repeat="c in vm.customers"
@@ -24,10 +24,8 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-8">
-                <div ng-show="vm.customer">
-                    <customer-card user="vm.customer"></customer-card>
-                </div>
+            <div class="col-sm-8">
+                <customer-card user="vm.customer" ng-show="vm.customer"></customer-card>
                 <!--<pre>{{vm.customer}}</pre>-->
             </div>
         </div>
