@@ -10,13 +10,18 @@
 </head>
 <body>
     <nav class="navbar navbar-default"></nav>
-    <div class="container">
-        <h2>{{8+3}}</h2>
+    <div class="container" ng-controller="IndexCtrl as vm">
+        <h2>{{vm.title}}</h2>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
     <script>
         angular.module('myApp', []);
+        angular.module('myApp').controller('IndexCtrl', [indexController]);
+        function indexController() {
+            var self = this;
+            self.title = 'Hello World';
+        };
     </script>
 </body>
 </html>
