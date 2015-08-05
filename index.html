@@ -24,11 +24,13 @@
         function CustomerController(customerService) {
             var self = this;
             self.title = 'Hello World';
-            self.customers = customerService.getData();
+            customerService.getData().then(function (data) {
+                self.customers = data;
+            });
 
         };
-        angular.module('myCustomers').factory('customerService', [customerService])
-        function customerService() {
+        angular.module('myCustomers').factory('customerService', ['$q', customerService])
+        function customerService($q) {
             var service = {
                 getData: getItems
             };
@@ -41,7 +43,7 @@
                     { CustomerID: 'CUST10', CompanyName: 'Company Name 10', ContactName: 'Contact Name 10' },
                     { CustomerID: 'CUST02', CompanyName: 'Company Name 2', ContactName: 'Contact Name 2' },
                 ];
-                return items;
+                return $q.when(items);
             };
         };
     </script>
