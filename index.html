@@ -16,7 +16,10 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="list-group">
-                    <a class="list-group-item" ng-repeat="c in vm.customers" ng-click="vm.selectCustomer(c)">
+                    <a class="list-group-item" 
+                       ng-repeat="c in vm.customers" 
+                       ng-click="vm.selectCustomer(c)" 
+                       ng-class="{ 'active': c == vm.customer }">
                         {{c.CompanyName}}
                     </a>
                 </div>
