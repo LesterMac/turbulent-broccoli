@@ -25,12 +25,14 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <customer-card user="vm.customer"></customer-card>
-                <pre>{{vm.customer}}</pre>
+                <div ng-show="vm.customer">
+                    <customer-card user="vm.customer"></customer-card>
+                </div>
+                <!--<pre>{{vm.customer}}</pre>-->
             </div>
         </div>
         <hr />
-        <pre>{{vm.customers}}</pre>
+        <!--<pre>{{vm.data}}</pre>-->
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
@@ -41,14 +43,15 @@
         angular.module('myCustomers').controller('CustomerCtrl', ['customerService', CustomerController]);
         function CustomerController(customerService) {
             var self = this;
-            self.title = 'Hello World';
+            self.title = 'Customer Controller';
             self.customers = [];
-            self.customer = {};
+            self.customer = null;
             self.selectCustomer = selectCustomer;
 
             activate();
             function activate() {
                 customerService.getData().then(function (data) {
+                    self.data = data;
                     self.customers = data.value;
                 });
             };
@@ -98,10 +101,19 @@
         }
     </script>
     <script type="text/ng-template" id="customerCardTemplate.html">
-        <div>
-            CustomerID: {{user.CustomerID}}<br />
-            CompanyName: {{user.CompanyName}}<br />
-            ContactName: {{user.ContactName}}
+        <div style="border: 1px solid aqua; border-radius: 10px; padding: 10px; width: 336px; height: 214px;">
+            <h4>{{user.CompanyName}}</h4>
+            Contact: <b>{{user.ContactName}}</b>
+            {{user.Phone}}
+            <h5>{{user.ContactTitle}}</h5>
+            <address>
+                {{user.Address}}<br />
+                {{user.City}}
+                {{user.Region}}
+                {{user.PostalCode}}<br />
+                {{user.Country}}
+            </address>
+            CustomerID: {{user.CustomerID}}
         </div>
     </script>
 
