@@ -24,9 +24,14 @@
         function CustomerController(customerService) {
             var self = this;
             self.title = 'Hello World';
-            customerService.getData().then(function (data) {
-                self.customers = data;
-            });
+            self.customers = [];
+
+            activate();
+            function activate() {
+                customerService.getData().then(function (data) {
+                    self.customers = data;
+                });
+            };
 
         };
         angular.module('myCustomers').factory('customerService', ['$q', customerService])
