@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,9 +11,12 @@
 <body>
     <nav class="navbar navbar-default"></nav>
     <div class="container">
-        <h2>Hello</h2>
+        <h2>{{8+3}}</h2>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script>
+        angular.module('myApp', []);
+    </script>
 </body>
 </html>
