@@ -14,7 +14,7 @@
         <h2>{{vm.title}}</h2>
         <hr />
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="list-group">
                     <a class="list-group-item"
                        ng-repeat="c in vm.customers"
@@ -24,7 +24,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <customer-card user="vm.customer"></customer-card>
                 <pre>{{vm.customer}}</pre>
             </div>
@@ -49,7 +49,7 @@
             activate();
             function activate() {
                 customerService.getData().then(function (data) {
-                    self.customers = data;
+                    self.customers = data.value;
                 });
             };
 
@@ -58,21 +58,26 @@
             }
 
         };
-        angular.module('myCustomers').factory('customerService', ['$q', customerService])
-        function customerService($q) {
+        angular.module('myCustomers').factory('customerService', ['$http', '$q', customerService])
+        function customerService($http, $q) {
             var service = {
                 getData: getItems
             };
             return service;
 
             function getItems() {
-                var items = [
-                    { CustomerID: 'CUST01', CompanyName: 'Company Name 1', ContactName: 'Contact Name 1' },
-                    { CustomerID: 'CUST03', CompanyName: 'Company Name 3', ContactName: 'Contact Name 3' },
-                    { CustomerID: 'CUST10', CompanyName: 'Company Name 10', ContactName: 'Contact Name 10' },
-                    { CustomerID: 'CUST02', CompanyName: 'Company Name 2', ContactName: 'Contact Name 2' },
-                ];
-                return $q.when(items);
+                //var items = [
+                //    { CustomerID: 'CUST01', CompanyName: 'Company Name 1', ContactName: 'Contact Name 1' },
+                //    { CustomerID: 'CUST03', CompanyName: 'Company Name 3', ContactName: 'Contact Name 3' },
+                //    { CustomerID: 'CUST10', CompanyName: 'Company Name 10', ContactName: 'Contact Name 10' },
+                //    { CustomerID: 'CUST02', CompanyName: 'Company Name 2', ContactName: 'Contact Name 2' },
+                //];
+                //return $q.when(items);
+                var url = 'http://services.odata.org/V4/Northwind/Northwind.svc/Customers';
+                var d = $q.defer();
+                $http.get(url).success(d.resolve).error(d.reject);
+                return d.promise;
+
             };
         };
         angular.module('myCustomers').directive('customerCard', ['$window', customerCard]);
