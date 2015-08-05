@@ -10,23 +10,25 @@
 </head>
 <body>
     <nav class="navbar navbar-default"></nav>
-    <div class="container" ng-controller="IndexCtrl as vm">
+    <div class="container" ng-controller="CustomerCtrl as vm">
         <h2>{{vm.title}}</h2>
         <pre>{{vm.customers}}</pre>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
     <script>
-        angular.module('myApp', []);
-        angular.module('myApp').controller('IndexCtrl', ['indexService', indexController]);
-        function indexController(indexService) {
+        angular.module('myApp', ['myCustomers']);
+
+        angular.module('myCustomers', []);
+        angular.module('myCustomers').controller('CustomerCtrl', ['customerService', CustomerController]);
+        function CustomerController(customerService) {
             var self = this;
             self.title = 'Hello World';
-            self.customers = indexService.getData();
+            self.customers = customerService.getData();
 
         };
-        angular.module('myApp').factory('indexService', [indexService])
-        function indexService() {
+        angular.module('myCustomers').factory('customerService', [customerService])
+        function customerService() {
             var service = {
                 getData: getItems
             };
