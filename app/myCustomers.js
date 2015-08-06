@@ -53,7 +53,8 @@
             scope: {
                 user: '='
             },
-            templateUrl: 'customerCardTemplate.html'
+            //templateUrl: 'customerCardTemplate.html'
+            templateUrl: 'app/myCustomersCard.html'
         };
         return directive;
 
